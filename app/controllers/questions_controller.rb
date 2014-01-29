@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @questions = Question.all
   end
 
   # GET /questions/new
@@ -25,9 +26,9 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-    @user = @questions.users.new()
     respond_to do |format|
       if @question.save
+        current_user.questions << @question
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }
       else
@@ -40,9 +41,9 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
-    @user = @questions.users.new()
     respond_to do |format|
       if @question.update(question_params)
+        current_user.questions << @question
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
         format.json { head :no_content }
       else

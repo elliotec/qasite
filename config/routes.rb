@@ -1,4 +1,5 @@
 Qasite::Application.routes.draw do
+  get "users/show"
   resources :questions
 
   devise_for :users

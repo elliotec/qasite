@@ -13,7 +13,7 @@
 <h2>List of Contributors</h2>
 
 <tbody>
-  <% @questions.each do |question| %>
+  <%= @questions.users.each do |user| %>
     <tr>
       <td>@question.user.email</td>
     </tr>
