@@ -27,8 +27,8 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     respond_to do |format|
-      if @question.save
-        current_user.questions << @question
+      if @question.save && @user
+      current_user.questions << @question
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }
       else
